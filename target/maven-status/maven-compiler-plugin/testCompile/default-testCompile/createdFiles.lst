@@ -1,9 +1,0 @@
-awesomecucumber\hooks\MyHooks.class
-awesomecucumber\pages\CartPage.class
-awesomecucumber\Steps\MyStepdefs.class
-awesomecucumber\domainobjects\BillingDetails.class
-awesomecucumber\pages\CheckOutPage.class
-awesomecucumber\pages\StorePage.class
-awesomecucumber\customtype\CustomDataTableType.class
-awesomecucumber\factory\DriverFactory.class
-awesomecucumber\pages\BasePage.class
