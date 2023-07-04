@@ -1,17 +1,22 @@
 package awesomecucumber.Steps;
 
+import awesomecucumber.constants.EndPoint;
+import awesomecucumber.constants.MyConstants;
 import awesomecucumber.customtype.CustomDataTableType;
 import awesomecucumber.domainobjects.BillingDetails;
+import awesomecucumber.domainobjects.Product;
 import awesomecucumber.factory.DriverFactory;
 import awesomecucumber.pages.CartPage;
 import awesomecucumber.pages.CheckOutPage;
 import awesomecucumber.pages.StorePage;
+import awesomecucumber.utils.ConfigLoader;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
+//import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class MyStepdefs {
     private WebDriver driver;
@@ -23,13 +28,13 @@ public class MyStepdefs {
         driver = DriverFactory.getDriver();
         System.out.println("DRIVER----------" + driver);
         StorePage storePage = new StorePage(driver);
-        storePage.load("https://askomdch.com/store");
+        storePage.load(EndPoint.STORE.url);
 
     }
 
-    @When("I add a {string} to the cart")
-    public void iAddAToTheCart(String productName) {
-        new StorePage(driver).addToCart(productName);
+    @When("I add a {product} to the cart")
+    public void iAddAToTheCart(Product product) {
+        new StorePage(driver).addToCart(product.getName());
 
         /*//System.out.println("PRODUCT NAME = " + productName.getName());
         By addToCartBtn = By.cssSelector("a[aria-label='Add “" + productName + "” to your cart']");
@@ -40,8 +45,8 @@ public class MyStepdefs {
         Thread.sleep(4000);*/
     }
 
-    @Then("I should see {int} {string} in the cart")
-    public void iShouldSeeInTheCart(int quantity, String productName) throws InterruptedException {
+    @Then("I should see {int} {product} in the cart")
+    public void iShouldSeeInTheCart(int quantity, Product product) throws InterruptedException {
         CartPage cartPage = new CartPage(driver);
         /*
         //System.out.println("PRODUCT NAME = " + product.getName());
@@ -50,7 +55,7 @@ public class MyStepdefs {
         By productQuantityFLd = By.cssSelector("input[type=\"number\"]");
         String actualQuantity = driver.findElement(productQuantityFLd).getAttribute("value");
         Thread.sleep(3000);*/
-        Assert.assertEquals(productName, cartPage.getProductName());
+        Assert.assertEquals(product.getName(), cartPage.getProductName());
         Assert.assertEquals(quantity, cartPage.getProductQuantity());
     }
 
@@ -59,7 +64,7 @@ public class MyStepdefs {
         driver = DriverFactory.getDriver();
         System.out.println("DRIVER----------" + driver);
         StorePage storePage = new StorePage(driver);
-        storePage.load("https://askomdch.com/store");
+        storePage.load(MyConstants.STORE);
         /*ChromeOptions options = new ChromeOptions();
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();

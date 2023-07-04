@@ -1,2 +1,6 @@
-package awesomecucumber.constants;public enum EnvType {
+package awesomecucumber.constants;
+
+public enum EnvType {
+    PROD,
+    STAGE
 }
